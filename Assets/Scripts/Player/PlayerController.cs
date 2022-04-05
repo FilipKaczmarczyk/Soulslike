@@ -31,6 +31,7 @@ namespace Player
             moveDirection = camera.forward * inputHandler.vertical;
             moveDirection += camera.right * inputHandler.horizontal;
             moveDirection.Normalize();
+            moveDirection.y = 0;
 
             moveDirection *= movementSpeed;
 

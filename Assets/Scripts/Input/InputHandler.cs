@@ -1,3 +1,5 @@
+using System;
+using Camera;
 using UnityEngine;
 
 namespace Input
@@ -8,13 +10,29 @@ namespace Input
         public float horizontal;
         public float vertical;
         
-        [SerializeField] private float mouseX;
-        [SerializeField] private float mouseY;
-
         private PlayerControls _inputActions;
-
+        private CameraController _cameraController;
+        
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
+        
+        private float _mouseX;
+        private float _mouseY;
+
+        private void Awake()
+        {
+            _cameraController = CameraController.cc;
+        }
+
+        private void FixedUpdate()
+        {
+            var delta = Time.fixedDeltaTime;
+
+            if (_cameraController == null) return;
+            
+            _cameraController.FollowTarget(delta);
+            _cameraController.HandleCameraRotation(delta, _mouseX, _mouseY);
+        }
 
         public void OnEnable()
         {
@@ -53,8 +71,8 @@ namespace Input
 
         private void CameraMove()
         {
-            mouseX = _cameraInput.x;
-            mouseY = _cameraInput.y;
+            _mouseX = _cameraInput.x;
+            _mouseY = _cameraInput.y;
         }
     }
 }
