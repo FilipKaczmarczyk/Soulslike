@@ -23,51 +23,52 @@ namespace Player
 
             float v = 0;
             
-            if (verticalMovement > 0 && verticalMovement < 0.55f)
+            if (verticalMovement < -0.55f)
             {
-                v = 0.5f;
-            }
-            else if (verticalMovement > 0.55f)
-            {
-                v = 1;
+                v = -1f;
             }
             else if (verticalMovement > -0.55f && verticalMovement < 0)
             {
                 v = -0.5f;
             }
-            else if (verticalMovement < -0.55f)
+            else if (verticalMovement > 0 && verticalMovement < 0.55f)
             {
-                v = -1f;
+                v = 0.5f;
+            }
+            else if (verticalMovement > 0.55f)
+            {
+                v = 1f;
             }
             else
             {
                 v = 0;
             }
+            
             #endregion
             
             #region Horizontal
 
             float h = 0;
             
-            if (horizontalMovement > 0 && horizontalMovement < 0.55f)
+            if (horizontalMovement < -0.55f)
             {
-                v = 0.5f;
-            }
-            else if (horizontalMovement > 0.55f)
-            {
-                v = 1;
+                h = -1f;
             }
             else if (horizontalMovement > -0.55f && horizontalMovement < 0)
             {
-                v = -0.5f;
+                h = -0.5f;
             }
-            else if (horizontalMovement < -0.55f)
+            else if (horizontalMovement > 0 && horizontalMovement < 0.55f)
             {
-                v = -1f;
+                h = 0.5f;
+            }
+            else if (horizontalMovement > 0.55f)
+            {
+                h = 1;
             }
             else
             {
-                v = 0;
+                h = 0;
             }
             
             #endregion
