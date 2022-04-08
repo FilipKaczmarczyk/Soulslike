@@ -14,7 +14,7 @@ namespace Player
         
         private int _vertical;
         private int _horizontal;
-        
+
         private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
 
         public void Init()
@@ -23,7 +23,7 @@ namespace Player
             _horizontal = Animator.StringToHash("Horizontal");
         }
 
-        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement)
+        public void UpdateAnimatorValues(float verticalMovement, float horizontalMovement, bool isSprinting)
         {
             #region Vertical
 
@@ -78,6 +78,12 @@ namespace Player
             }
             
             #endregion
+
+            if (isSprinting)
+            {
+                v = 2;
+                h = horizontalMovement;
+            }
             
             anim.SetFloat(_vertical, v, 0.1f, Time.deltaTime);
             anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
@@ -85,7 +91,7 @@ namespace Player
 
         public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
-            anim.applyRootMotion = isInteracting;
+            // anim.applyRootMotion = isInteracting;
             anim.SetBool(IsInteracting, isInteracting);
             anim.CrossFade(targetAnimation, 0.2f);
         }

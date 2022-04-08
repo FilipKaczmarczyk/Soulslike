@@ -985,7 +985,10 @@ MonoBehaviour:
   moveAmount: 0
   horizontal: 0
   vertical: 0
+  _isActionInputPressed: 0
   rollFlag: 0
+  rollInputTimer: 0
+  sprintFlag: 0
   isInteracting: 0
 --- !u!114 &1842505019
 MonoBehaviour:
@@ -1004,6 +1007,7 @@ MonoBehaviour:
   inputHandler: {fileID: 1842505018}
   animatorHandler: {fileID: 1842505020}
   movementSpeed: 5
+  sprintSpeed: 8
   rotationSpeed: 10
 --- !u!114 &1842505020
 MonoBehaviour:

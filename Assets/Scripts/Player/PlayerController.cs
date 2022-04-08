@@ -17,8 +17,11 @@ namespace Player
 
         [Header("Statistics")] 
         [SerializeField] private float movementSpeed;
+        [SerializeField] private float sprintSpeed;
         [SerializeField] private float rotationSpeed;
 
+        private bool _isSprinting;
+        
         private void Start()
         {
             animatorHandler.Init();
@@ -27,14 +30,14 @@ namespace Player
         private void Update()
         {
             var delta = Time.deltaTime;
+
+            _isSprinting = inputHandler._isActionInputPressed;
             
             inputHandler.TickInput(delta);
 
             HandleMovement(delta);
 
             HandleRollingAndSprinting(delta);
-            
-            Debug.Log(inputHandler.rollFlag);
         }
 
         #region Movement
@@ -44,17 +47,28 @@ namespace Player
 
         private void HandleMovement(float delta)
         {
+            if (inputHandler.rollFlag)
+                return;
+                
             moveDirection = camera.forward * inputHandler.vertical;
             moveDirection += camera.right * inputHandler.horizontal;
             moveDirection.Normalize();
             moveDirection.y = 0;
 
-            moveDirection *= movementSpeed;
+            var speed = movementSpeed;
+            
+            if (inputHandler.sprintFlag)
+            {
+                speed = sprintSpeed;
+                _isSprinting = true;
+            }
+            
+            moveDirection *= speed;
 
             var projectedVelocity = Vector3.ProjectOnPlane(moveDirection, _normalVector);
             rigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0f);
+            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0f, _isSprinting);
             
             if (animatorHandler.CanRotate)
             {
@@ -102,7 +116,7 @@ namespace Player
                 }
                 else
                 {
-                    animatorHandler.PlayTargetAnimation("BackStep", true);
+                   // animatorHandler.PlayTargetAnimation("BackStep", true);
                 }
             }
         }

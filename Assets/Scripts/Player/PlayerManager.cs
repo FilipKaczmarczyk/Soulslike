@@ -14,6 +14,7 @@ namespace Player
         {
             _inputHandler.isInteracting = _animator.GetBool(IsInteracting);
             _inputHandler.rollFlag = false;
+            _inputHandler.sprintFlag = false;
         }
     }
 }

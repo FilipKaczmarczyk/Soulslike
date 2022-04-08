@@ -20,11 +20,12 @@ namespace Input
         private float _mouseX;
         private float _mouseY;
 
-        private bool _isActionInputPressed;
-        
+        public bool _isActionInputPressed;
         public bool rollFlag;
+        public float rollInputTimer;
+        public bool sprintFlag;
         public bool isInteracting;
-
+        
         private void Start()
         {
             _cameraController = CameraController.cc;
@@ -88,7 +89,18 @@ namespace Input
 
             if (_isActionInputPressed)
             {
-                rollFlag = true;
+                rollInputTimer += delta;
+                sprintFlag = true;
+            }
+            else
+            {
+                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+                {
+                    sprintFlag = false;
+                    rollFlag = true;
+                }
+
+                rollInputTimer = 0;
             }
         }
     }
