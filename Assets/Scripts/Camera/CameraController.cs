@@ -1,4 +1,5 @@
 using System;
+using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -66,7 +67,6 @@ namespace Camera
             targetRotation = Quaternion.Euler(rotation);
             cameraPivot.localRotation = targetRotation;
         }
-
         private void HandleCameraCollision(float delta)
         {
             _targetPosition = _defaultPosition;
@@ -89,5 +89,7 @@ namespace Camera
             _cameraTransformPosition.z = Mathf.Lerp(_cameraTransformPosition.z, _targetPosition, delta / 0.2f);
             defaultCamera.localPosition = _cameraTransformPosition;
         }
+        
     }
+    
 }

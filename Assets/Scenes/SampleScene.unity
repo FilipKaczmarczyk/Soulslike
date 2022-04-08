@@ -917,6 +917,7 @@ GameObject:
   - component: {fileID: 1842505019}
   - component: {fileID: 1842505018}
   - component: {fileID: 1842505020}
+  - component: {fileID: 1842505021}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -984,6 +985,8 @@ MonoBehaviour:
   moveAmount: 0
   horizontal: 0
   vertical: 0
+  rollFlag: 0
+  isInteracting: 0
 --- !u!114 &1842505019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -996,8 +999,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc1a7e02c9612341993b009fd4e9ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  camera: {fileID: 963194228}
   rigidbody: {fileID: 1842505016}
+  camera: {fileID: 963194228}
   inputHandler: {fileID: 1842505018}
   animatorHandler: {fileID: 1842505020}
   movementSpeed: 5
@@ -1015,7 +1018,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9179720451628771132}
-  canRotate: 1
+  inputHandler: {fileID: 1842505018}
+  playerController: {fileID: 1842505019}
+--- !u!114 &1842505021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842505014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd942bd7295c984d8e25483cfed28e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _inputHandler: {fileID: 1842505018}
+  _animator: {fileID: 9179720451628771132}
 --- !u!1001 &5560693730494908135
 PrefabInstance:
   m_ObjectHideFlags: 0

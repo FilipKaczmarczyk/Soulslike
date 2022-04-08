@@ -1,4 +1,5 @@
 using System;
+using Camera;
 using Input;
 using UnityEngine;
 
@@ -6,8 +7,9 @@ namespace Player
 {
     public class PlayerController : MonoBehaviour
     {
+        public Rigidbody rigidbody;
+        
         [SerializeField] private Transform camera;
-        [SerializeField] private Rigidbody rigidbody;
         [SerializeField] private InputHandler inputHandler;
         [SerializeField] private AnimatorHandler animatorHandler;
         
@@ -28,6 +30,20 @@ namespace Player
             
             inputHandler.TickInput(delta);
 
+            HandleMovement(delta);
+
+            HandleRollingAndSprinting(delta);
+            
+            Debug.Log(inputHandler.rollFlag);
+        }
+
+        #region Movement
+
+        private Vector3 _normalVector;
+        private Vector3 _targetPosition;
+
+        private void HandleMovement(float delta)
+        {
             moveDirection = camera.forward * inputHandler.vertical;
             moveDirection += camera.right * inputHandler.horizontal;
             moveDirection.Normalize();
@@ -40,17 +56,12 @@ namespace Player
 
             animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0f);
             
-            if (animatorHandler.canRotate)
+            if (animatorHandler.CanRotate)
             {
                 HandleRotation(delta);
             }
         }
-
-        #region Movement
-
-        private Vector3 _normalVector;
-        private Vector3 _targetPosition;
-
+        
         private void HandleRotation(float delta)
         {
             var moveOverride = inputHandler.moveAmount;
@@ -70,6 +81,30 @@ namespace Player
             var targetRotation = Quaternion.Slerp(transform.rotation, lookRotation, rotationSpeed * delta);
 
             transform.rotation = targetRotation;
+        }
+        
+        private void HandleRollingAndSprinting(float delta)
+        {
+            if (animatorHandler.anim.GetBool("IsInteracting"))
+                return;
+
+            if (inputHandler.rollFlag)
+            {
+                moveDirection = camera.forward * inputHandler.vertical;
+                moveDirection += camera.right * inputHandler.horizontal;
+
+                if (inputHandler.moveAmount > 0)
+                {
+                    animatorHandler.PlayTargetAnimation("Rolling", true);
+                    moveDirection.y = 0;
+                    var rollRotation = Quaternion.LookRotation(moveDirection);
+                    transform.rotation = rollRotation;
+                }
+                else
+                {
+                    animatorHandler.PlayTargetAnimation("BackStep", true);
+                }
+            }
         }
 
         #endregion

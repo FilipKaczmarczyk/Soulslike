@@ -1,6 +1,7 @@
 using System;
 using Camera;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Input
 {
@@ -19,7 +20,12 @@ namespace Input
         private float _mouseX;
         private float _mouseY;
 
-        private void Awake()
+        private bool _isActionInputPressed;
+        
+        public bool rollFlag;
+        public bool isInteracting;
+
+        private void Start()
         {
             _cameraController = CameraController.cc;
         }
@@ -59,6 +65,7 @@ namespace Input
         {
             BodyMove(delta);
             CameraMove();
+            Roll(delta);
         }
 
         private void BodyMove(float delta)
@@ -73,6 +80,16 @@ namespace Input
         {
             _mouseX = _cameraInput.x;
             _mouseY = _cameraInput.y;
+        }
+
+        private void Roll(float delta)
+        {
+            _isActionInputPressed = _inputActions.PlayerActions.Roll.phase == InputActionPhase.Started;
+
+            if (_isActionInputPressed)
+            {
+                rollFlag = true;
+            }
         }
     }
 }

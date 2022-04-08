@@ -1,15 +1,21 @@
+using Input;
 using UnityEngine;
 
 namespace Player
 {
     public class AnimatorHandler : MonoBehaviour
     {
-        [SerializeField] private Animator anim;
+        public bool CanRotate { get; set; } = true;
+        
+        public Animator anim;
 
+        [SerializeField] private InputHandler inputHandler;
+        [SerializeField] private PlayerController playerController;
+        
         private int _vertical;
         private int _horizontal;
-
-        public bool canRotate;
+        
+        private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
 
         public void Init()
         {
@@ -77,9 +83,24 @@ namespace Player
             anim.SetFloat(_horizontal, h, 0.1f, Time.deltaTime);
         }
 
-        public void SetRotate(bool state)
+        public void PlayTargetAnimation(string targetAnimation, bool isInteracting)
         {
-            canRotate = state;
+            anim.applyRootMotion = isInteracting;
+            anim.SetBool(IsInteracting, isInteracting);
+            anim.CrossFade(targetAnimation, 0.2f);
+        }
+
+        private void OnAnimatorMove()
+        {
+            if (inputHandler.isInteracting == false)
+                return;
+
+            var delta = Time.deltaTime;
+            playerController.rigidbody.drag = 0;
+            var deltaPosition = anim.deltaPosition;
+            deltaPosition.y = 0;
+            var velocity = deltaPosition / delta;
+            playerController.rigidbody.velocity = velocity;
         }
     }
 }
