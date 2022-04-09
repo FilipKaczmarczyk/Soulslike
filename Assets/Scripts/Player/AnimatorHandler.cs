@@ -8,9 +8,9 @@ namespace Player
         public bool CanRotate { get; set; } = true;
         
         public Animator anim;
-
-        [SerializeField] private InputHandler inputHandler;
+        
         [SerializeField] private PlayerController playerController;
+        [SerializeField] private PlayerManager playerManager;
         
         private int _vertical;
         private int _horizontal;
@@ -98,15 +98,15 @@ namespace Player
 
         private void OnAnimatorMove()
         {
-            if (inputHandler.isInteracting == false)
+            if (playerManager.isInteracting == false)
                 return;
 
             var delta = Time.deltaTime;
-            playerController.rigidbody.drag = 0;
+            playerController.playerRigidbody.drag = 0;
             var deltaPosition = anim.deltaPosition;
             deltaPosition.y = 0;
             var velocity = deltaPosition / delta;
-            playerController.rigidbody.velocity = velocity;
+            playerController.playerRigidbody.velocity = velocity;
         }
     }
 }

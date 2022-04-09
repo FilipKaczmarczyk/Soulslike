@@ -7,6 +7,9 @@ namespace Input
 {
     public class InputHandler : MonoBehaviour
     {
+        public float MouseX { get; private set; }
+        public float MouseY { get; private set; }
+        
         public float moveAmount;
         public float horizontal;
         public float vertical;
@@ -17,30 +20,16 @@ namespace Input
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
         
-        private float _mouseX;
-        private float _mouseY;
-
         public bool _isActionInputPressed;
         public bool rollFlag;
         public float rollInputTimer;
         public bool sprintFlag;
-        public bool isInteracting;
         
         private void Start()
         {
             _cameraController = CameraController.cc;
         }
-
-        private void FixedUpdate()
-        {
-            var delta = Time.fixedDeltaTime;
-
-            if (_cameraController == null) return;
-            
-            _cameraController.FollowTarget(delta);
-            _cameraController.HandleCameraRotation(delta, _mouseX, _mouseY);
-        }
-
+        
         public void OnEnable()
         {
             if (_inputActions == null)
@@ -79,8 +68,8 @@ namespace Input
 
         private void CameraMove()
         {
-            _mouseX = _cameraInput.x;
-            _mouseY = _cameraInput.y;
+            MouseX = _cameraInput.x;
+            MouseY = _cameraInput.y;
         }
 
         private void Roll(float delta)

@@ -989,7 +989,6 @@ MonoBehaviour:
   rollFlag: 0
   rollInputTimer: 0
   sprintFlag: 0
-  isInteracting: 0
 --- !u!114 &1842505019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1002,8 +1001,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc1a7e02c9612341993b009fd4e9ffa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rigidbody: {fileID: 1842505016}
-  camera: {fileID: 963194228}
+  playerRigidbody: {fileID: 1842505016}
+  playerManager: {fileID: 1842505021}
+  mainCamera: {fileID: 963194228}
   inputHandler: {fileID: 1842505018}
   animatorHandler: {fileID: 1842505020}
   movementSpeed: 5
@@ -1022,8 +1022,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 9179720451628771132}
-  inputHandler: {fileID: 1842505018}
   playerController: {fileID: 1842505019}
+  playerManager: {fileID: 1842505021}
 --- !u!114 &1842505021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1036,8 +1036,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd942bd7295c984d8e25483cfed28e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _inputHandler: {fileID: 1842505018}
-  _animator: {fileID: 9179720451628771132}
+  inputHandler: {fileID: 1842505018}
+  animator: {fileID: 9179720451628771132}
+  cameraController: {fileID: 768699720}
+  playerController: {fileID: 1842505019}
+  isInteracting: 0
+  isSprinting: 0
 --- !u!1001 &5560693730494908135
 PrefabInstance:
   m_ObjectHideFlags: 0
