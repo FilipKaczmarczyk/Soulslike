@@ -1,4 +1,3 @@
-using System;
 using Camera;
 using Input;
 using UnityEngine;
@@ -11,18 +10,16 @@ namespace Player
         [SerializeField] private Animator animator;
         [SerializeField] private CameraController cameraController;
         [SerializeField] private PlayerController playerController;
-         
-        [Header("Flags")]
-        public bool isInteracting;
-        public bool isSprinting;
+        public bool IsInteracting { get; private set; }
+        public bool IsSprinting { get; set; }
         
-        private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
+        private static readonly int AnimatorIsInteracting = Animator.StringToHash("IsInteracting");
 
         private void Update()
         {
             var delta = Time.deltaTime;
             
-            isInteracting = animator.GetBool(IsInteracting);
+            IsInteracting = animator.GetBool(AnimatorIsInteracting);
             
             inputHandler.TickInput(delta);
 
@@ -42,9 +39,9 @@ namespace Player
 
         private void LateUpdate()
         {
-            inputHandler.rollFlag = false;
-            inputHandler.sprintFlag = false;
-            isSprinting = inputHandler._isActionInputPressed;
+            inputHandler.RollFlag = false;
+            inputHandler.SprintFlag = false;
+            IsSprinting = inputHandler.IsActionInputPressed;
         }
     }
 }

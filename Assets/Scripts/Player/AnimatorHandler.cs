@@ -1,4 +1,3 @@
-using Input;
 using UnityEngine;
 
 namespace Player
@@ -27,7 +26,7 @@ namespace Player
         {
             #region Vertical
 
-            float v = 0;
+            float v;
             
             if (verticalMovement < -0.55f)
             {
@@ -54,7 +53,7 @@ namespace Player
             
             #region Horizontal
 
-            float h = 0;
+            float h;
             
             if (horizontalMovement < -0.55f)
             {
@@ -98,7 +97,7 @@ namespace Player
 
         private void OnAnimatorMove()
         {
-            if (playerManager.isInteracting == false)
+            if (playerManager.IsInteracting == false)
                 return;
 
             var delta = Time.deltaTime;

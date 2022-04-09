@@ -1,8 +1,5 @@
-using System;
-using Camera;
 using Input;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Player
 {
@@ -29,36 +26,33 @@ namespace Player
         }
         
         #region Movement
-
-        private Vector3 _normalVector;
-        private Vector3 _targetPosition;
         
         private static readonly int IsInteracting = Animator.StringToHash("IsInteracting");
 
         public void HandleMovement(float delta)
         {
-            if (inputHandler.rollFlag)
+            if (inputHandler.RollFlag)
                 return;
                 
-            _moveDirection = mainCamera.forward * inputHandler.vertical;
-            _moveDirection += mainCamera.right * inputHandler.horizontal;
+            _moveDirection = mainCamera.forward * inputHandler.Vertical;
+            _moveDirection += mainCamera.right * inputHandler.Horizontal;
             _moveDirection.Normalize();
             _moveDirection.y = 0;
 
             var speed = movementSpeed;
             
-            if (inputHandler.sprintFlag)
+            if (inputHandler.SprintFlag)
             {
                 speed = sprintSpeed;
-                playerManager.isSprinting = true;
+                playerManager.IsSprinting = true;
             }
             
             _moveDirection *= speed;
 
-            var projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, _normalVector);
+            var projectedVelocity = Vector3.ProjectOnPlane(_moveDirection, Vector3.zero);
             playerRigidbody.velocity = projectedVelocity;
 
-            animatorHandler.UpdateAnimatorValues(inputHandler.moveAmount, 0f, playerManager.isSprinting);
+            animatorHandler.UpdateAnimatorValues(inputHandler.MoveAmount, 0f, playerManager.IsSprinting);
             
             if (animatorHandler.CanRotate)
             {
@@ -68,10 +62,8 @@ namespace Player
         
         private void HandleRotation(float delta)
         {
-            var moveOverride = inputHandler.moveAmount;
-
-            var targetDirection = mainCamera.forward * inputHandler.vertical;
-            targetDirection += mainCamera.right * inputHandler.horizontal;
+            var targetDirection = mainCamera.forward * inputHandler.Vertical;
+            targetDirection += mainCamera.right * inputHandler.Horizontal;
 
             targetDirection.Normalize();
             targetDirection.y = 0;
@@ -92,12 +84,12 @@ namespace Player
             if (animatorHandler.anim.GetBool(IsInteracting))
                 return;
 
-            if (inputHandler.rollFlag)
+            if (inputHandler.RollFlag)
             {
-                _moveDirection = mainCamera.forward * inputHandler.vertical;
-                _moveDirection += mainCamera.right * inputHandler.horizontal;
+                _moveDirection = mainCamera.forward * inputHandler.Vertical;
+                _moveDirection += mainCamera.right * inputHandler.Horizontal;
 
-                if (inputHandler.moveAmount > 0)
+                if (inputHandler.MoveAmount > 0)
                 {
                     animatorHandler.PlayTargetAnimation("Rolling", true);
                     _moveDirection.y = 0;

@@ -1,14 +1,9 @@
-using System;
-using Player;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Camera
 {
     public class CameraController : MonoBehaviour
     {
-        public static CameraController cc;
-        
         [SerializeField] private Transform defaultCamera;
         [SerializeField] private Transform cameraPivot;
         [SerializeField] private GameObject cameraTarget;
@@ -34,7 +29,6 @@ namespace Camera
 
         private void Awake()
         {
-            cc = this;
             _defaultPosition = defaultCamera.transform.localPosition.z;
             ignoreLayers = ~(1 << 8 | 1 << 9 | 1 << 10);
         }

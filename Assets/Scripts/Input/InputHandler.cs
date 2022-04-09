@@ -1,5 +1,3 @@
-using System;
-using Camera;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,25 +8,20 @@ namespace Input
         public float MouseX { get; private set; }
         public float MouseY { get; private set; }
         
-        public float moveAmount;
-        public float horizontal;
-        public float vertical;
+        public float MoveAmount { get; private set; }
+        public float Horizontal{ get; private set; }
+        public float Vertical { get; private set; }
         
+        public bool IsActionInputPressed { get; private set; }
+        public bool RollFlag { get; set; }
+        public bool SprintFlag { get; set; }
+
         private PlayerControls _inputActions;
-        private CameraController _cameraController;
-        
+
         private Vector2 _movementInput;
         private Vector2 _cameraInput;
-        
-        public bool _isActionInputPressed;
-        public bool rollFlag;
-        public float rollInputTimer;
-        public bool sprintFlag;
-        
-        private void Start()
-        {
-            _cameraController = CameraController.cc;
-        }
+
+        private float _rollInputTimer;
         
         public void OnEnable()
         {
@@ -53,17 +46,17 @@ namespace Input
 
         public void TickInput(float delta)
         {
-            BodyMove(delta);
+            BodyMove();
             CameraMove();
             Roll(delta);
         }
 
-        private void BodyMove(float delta)
+        private void BodyMove()
         {
-            horizontal = _movementInput.x;
-            vertical = _movementInput.y;
+            Horizontal = _movementInput.x;
+            Vertical = _movementInput.y;
 
-            moveAmount = Mathf.Clamp01(Mathf.Abs(horizontal) + Mathf.Abs(vertical));
+            MoveAmount = Mathf.Clamp01(Mathf.Abs(Horizontal) + Mathf.Abs(Vertical));
         }
 
         private void CameraMove()
@@ -74,23 +67,24 @@ namespace Input
 
         private void Roll(float delta)
         {
-            _isActionInputPressed = _inputActions.PlayerActions.Roll.phase == InputActionPhase.Started;
+            IsActionInputPressed = _inputActions.PlayerActions.Roll.phase == InputActionPhase.Started;
 
-            if (_isActionInputPressed)
+            if (IsActionInputPressed)
             {
-                rollInputTimer += delta;
-                sprintFlag = true;
+                _rollInputTimer += delta;
+                SprintFlag = true;
             }
             else
             {
-                if (rollInputTimer > 0 && rollInputTimer < 0.5f)
+                if (_rollInputTimer > 0 && _rollInputTimer < 0.5f)
                 {
-                    sprintFlag = false;
-                    rollFlag = true;
+                    SprintFlag = false;
+                    RollFlag = true;
                 }
 
-                rollInputTimer = 0;
+                _rollInputTimer = 0;
             }
         }
+        
     }
 }
