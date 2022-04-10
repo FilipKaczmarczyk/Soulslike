@@ -2644,9 +2644,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.21434048
-  m_Height: 1.8391762
+  m_Height: 1.5
   m_Direction: 1
-  m_Center: {x: 0.00010558963, y: 0.87404776, z: 0}
+  m_Center: {x: 0, y: 1, z: 0}
 --- !u!114 &1842505018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2672,6 +2672,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerRigidbody: {fileID: 1842505016}
+  moveDirection: {x: 0, y: 0, z: 0}
   playerManager: {fileID: 1842505021}
   mainCamera: {fileID: 963194228}
   inputHandler: {fileID: 1842505018}
@@ -2679,6 +2680,14 @@ MonoBehaviour:
   movementSpeed: 5
   sprintSpeed: 8
   rotationSpeed: 10
+  fallSped: 5
+  groundDetectionRayStartPoint: 0.5
+  minimumDistanceToBeginFall: 1
+  groundDetectionRayDistance: 0.05
+  ignoreGroundCheck:
+    serializedVersion: 2
+    m_Bits: 0
+  inAirTimer: 0
 --- !u!114 &1842505020
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -12,6 +12,8 @@ namespace Player
         [SerializeField] private PlayerController playerController;
         public bool IsInteracting { get; private set; }
         public bool IsSprinting { get; set; }
+        public bool IsInAir { get; set; }
+        public bool IsGrounded { get; set; }
         
         private static readonly int AnimatorIsInteracting = Animator.StringToHash("IsInteracting");
 
@@ -25,6 +27,7 @@ namespace Player
 
             playerController.HandleMovement(delta);
             playerController.HandleRollingAndSprinting(delta);
+            playerController.HandleFall(delta);
         }
         
         private void FixedUpdate()
@@ -42,6 +45,11 @@ namespace Player
             inputHandler.RollFlag = false;
             inputHandler.SprintFlag = false;
             IsSprinting = inputHandler.IsActionInputPressed;
+
+            if (IsInAir)
+            {
+                playerController.inAirTimer += Time.deltaTime;
+            }
         }
     }
 }
