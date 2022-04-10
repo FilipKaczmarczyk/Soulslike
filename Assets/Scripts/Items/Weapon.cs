@@ -7,5 +7,9 @@ namespace Items
     {
         public GameObject weaponPrefab;
         public bool isUnarmed;
+
+        [Header("One handed attack animation")] 
+        public string oneHandLightAttack;
+        public string oneHandHeavyAttack;
     }
 }

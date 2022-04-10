@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace Input
 {
@@ -12,9 +13,15 @@ namespace Input
         public float Horizontal{ get; private set; }
         public float Vertical { get; private set; }
         
+        public bool LightAttackInput { get; set; }
+        public bool HeavyAttackInput { get; set; }
+        
         public bool IsActionInputPressed { get; private set; }
         public bool RollFlag { get; set; }
         public bool SprintFlag { get; set; }
+
+        [SerializeField] private PlayerAttacks playerAttacks;
+        [SerializeField] private PlayerInventory playerInventory;
 
         private PlayerControls _inputActions;
 
@@ -49,6 +56,7 @@ namespace Input
             BodyMove();
             CameraMove();
             Roll(delta);
+            Attack(delta);
         }
 
         private void BodyMove()
@@ -85,6 +93,22 @@ namespace Input
                 _rollInputTimer = 0;
             }
         }
-        
+
+        private void Attack(float delta)
+        {
+            _inputActions.PlayerActions.LightAttack.performed += inputActions => LightAttackInput = true;
+            _inputActions.PlayerActions.HeavyAttack.performed += inputActions => HeavyAttackInput = true;
+
+            if (LightAttackInput)
+            {
+                playerAttacks.HandleLightAttack(playerInventory.rightHandWeapon);
+            }
+            
+            if (HeavyAttackInput)
+            {
+                playerAttacks.HandleHeavyAttack(playerInventory.rightHandWeapon);
+            }
+            
+        }
     }
 }

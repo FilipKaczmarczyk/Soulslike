@@ -44,6 +44,8 @@ namespace Player
         {
             inputHandler.RollFlag = false;
             inputHandler.SprintFlag = false;
+            inputHandler.LightAttackInput = false;
+            inputHandler.HeavyAttackInput = false;
 
             if (IsInAir)
             {

@@ -2676,6 +2676,7 @@ GameObject:
   - component: {fileID: 1842505020}
   - component: {fileID: 1842505021}
   - component: {fileID: 1842505022}
+  - component: {fileID: 1842505023}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -2740,6 +2741,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 766de16ec36e96b4dbdff0442a5d8694, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerAttacks: {fileID: 1842505023}
+  playerInventory: {fileID: 1842505022}
 --- !u!114 &1842505019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2815,6 +2818,19 @@ MonoBehaviour:
   weaponSlotManager: {fileID: 5560693730494908143}
   rightHandWeapon: {fileID: 11400000, guid: 01d727fd2ef7f7643a41348b94011b91, type: 2}
   leftHandWeapon: {fileID: 11400000, guid: 01d727fd2ef7f7643a41348b94011b91, type: 2}
+--- !u!114 &1842505023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1842505014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69247db71f1770346ba65311c76e22e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animatorHandler: {fileID: 1842505020}
 --- !u!1 &1969787269
 GameObject:
   m_ObjectHideFlags: 0
@@ -2997,8 +3013,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bb4fb361818ae04da873719a54f8358, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  leftHandSlot: {fileID: 0}
-  rightHandSlot: {fileID: 0}
+  leftHandSlot: {fileID: 833362631}
+  rightHandSlot: {fileID: 528799087}
 --- !u!4 &9089846131064384874 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3678899493591919501, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}

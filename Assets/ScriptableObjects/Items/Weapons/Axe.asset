@@ -16,3 +16,5 @@ MonoBehaviour:
   itemName: Axe
   weaponPrefab: {fileID: 1714960730929316321, guid: 781cd3481244dec42a28ac9ea394337b, type: 3}
   isUnarmed: 0
+  oneHandLightAttack: RightHandLightAttack01
+  oneHandHeavyAttack: RightHandHeavyAttack01
