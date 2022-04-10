@@ -44,7 +44,6 @@ namespace Player
         {
             inputHandler.RollFlag = false;
             inputHandler.SprintFlag = false;
-            IsSprinting = inputHandler.IsActionInputPressed;
 
             if (IsInAir)
             {

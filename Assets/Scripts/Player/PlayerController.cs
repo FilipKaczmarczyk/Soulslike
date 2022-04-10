@@ -55,10 +55,15 @@ namespace Player
 
             var speed = movementSpeed;
             
-            if (inputHandler.SprintFlag)
+            if (inputHandler.SprintFlag && inputHandler.MoveAmount > 0.5f)
             {
                 speed = sprintSpeed;
                 playerManager.IsSprinting = true;
+            }
+
+            if (inputHandler.MoveAmount < 0.5f)
+            {
+                playerManager.IsSprinting = false;
             }
             
             moveDirection *= speed;
