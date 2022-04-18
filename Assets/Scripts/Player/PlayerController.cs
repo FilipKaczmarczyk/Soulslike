@@ -161,7 +161,7 @@ namespace Player
                     }
                     else
                     {
-                        animatorHandler.PlayTargetAnimation("Movement", true);
+                        animatorHandler.PlayTargetAnimation("Empty", true);
                     }
                     
                     inAirTimer = 0;
@@ -189,17 +189,14 @@ namespace Player
                     playerManager.IsInAir = true;
                 }
             }
-
-            if (playerManager.IsGrounded)
+            
+            if (playerManager.IsInteracting || inputHandler.MoveAmount > 0)
             {
-                if (playerManager.IsInteracting || inputHandler.MoveAmount > 0)
-                {
-                    transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime);
-                }
-                else
-                {
-                    transform.position = targetPosition;
-                }
+                transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime / 0.1f);
+            }
+            else
+            {
+                transform.position = targetPosition;
             }
         }
 
