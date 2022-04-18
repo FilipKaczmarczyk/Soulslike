@@ -7,7 +7,10 @@ public class WeaponSlotManager : MonoBehaviour
     [SerializeField] private WeaponHolderSlot leftHandSlot;
     [SerializeField] private WeaponHolderSlot rightHandSlot;
 
-    private void Awake()
+    private DamageCollider _leftHandDamageCollider;
+    private DamageCollider _rightHandDamageCollider;
+
+    private void Start()
     {
         var weaponHolderSlots = GetComponentsInChildren<WeaponHolderSlot>();
         
@@ -17,10 +20,12 @@ public class WeaponSlotManager : MonoBehaviour
             {
                 case HandSlot.Left:
                     leftHandSlot = weaponHolderSlot;
+                    LoadLeftWeaponDamageCollider();
                     break;
                 
                 case HandSlot.Right:
                     rightHandSlot = weaponHolderSlot;
+                    LoadRightWeaponDamageCollider();
                     break;
                 
                 default:
@@ -45,4 +50,38 @@ public class WeaponSlotManager : MonoBehaviour
                 throw new ArgumentOutOfRangeException(nameof(handSlot), handSlot, null);
         }
     }
+    
+    #region Handle Weapon's Damage Colliders
+    
+    private void LoadLeftWeaponDamageCollider()
+    {
+        _leftHandDamageCollider = leftHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+    
+    private void LoadRightWeaponDamageCollider()
+    {
+        _rightHandDamageCollider = rightHandSlot.currentWeaponModel.GetComponentInChildren<DamageCollider>();
+    }
+
+    public void EnableLeftWeaponDamageCollider()
+    {
+        _leftHandDamageCollider.ToggleDamageCollider(true);
+    }
+    
+    public void EnableRightWeaponDamageCollider()
+    {
+        _rightHandDamageCollider.ToggleDamageCollider(true);
+    }
+    
+    public void DisableLeftWeaponDamageCollider()
+    {
+        _leftHandDamageCollider.ToggleDamageCollider(false);
+    }
+    
+    public void DisableRightWeaponDamageCollider()
+    {
+        _rightHandDamageCollider.ToggleDamageCollider(false);
+    }
+    
+    #endregion
 }
