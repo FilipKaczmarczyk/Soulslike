@@ -1,3 +1,4 @@
+using Player;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
@@ -19,9 +20,11 @@ namespace Input
         public bool IsActionInputPressed { get; private set; }
         public bool RollFlag { get; set; }
         public bool SprintFlag { get; set; }
+        public bool ComboFlag { get; set; }
 
         [SerializeField] private PlayerAttacks playerAttacks;
         [SerializeField] private PlayerInventory playerInventory;
+        [SerializeField] private PlayerManager playerManager;
 
         private PlayerControls _inputActions;
 
@@ -101,7 +104,22 @@ namespace Input
 
             if (LightAttackInput)
             {
-                playerAttacks.HandleLightAttack(playerInventory.rightHandWeapon);
+                if (playerManager.Combo)
+                {
+                    ComboFlag = true;
+                    playerAttacks.WeaponCombo(playerInventory.rightHandWeapon);
+                    ComboFlag = false;
+                }
+                else
+                {
+                    if (playerManager.IsInteracting)
+                        return;
+                    
+                    if (playerManager.Combo)
+                        return;
+                    
+                    playerAttacks.HandleLightAttack(playerInventory.rightHandWeapon);
+                }
             }
             
             if (HeavyAttackInput)

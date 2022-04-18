@@ -9,7 +9,8 @@ namespace Items
         public bool isUnarmed;
 
         [Header("One handed attack animation")] 
-        public string oneHandLightAttack;
+        public string oneHandLightAttack00;
+        public string oneHandLightAttack01;
         public string oneHandHeavyAttack;
     }
 }

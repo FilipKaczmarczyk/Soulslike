@@ -14,14 +14,17 @@ namespace Player
         public bool IsSprinting { get; set; }
         public bool IsInAir { get; set; }
         public bool IsGrounded { get; set; }
+        public bool Combo { get; set; }
         
         private static readonly int AnimatorIsInteracting = Animator.StringToHash("IsInteracting");
+        private static readonly int AnimatorCombo = Animator.StringToHash("Combo");
 
         private void Update()
         {
             var delta = Time.deltaTime;
             
             IsInteracting = animator.GetBool(AnimatorIsInteracting);
+            Combo = animator.GetBool(AnimatorCombo);
             
             inputHandler.TickInput(delta);
 

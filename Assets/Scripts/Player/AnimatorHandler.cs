@@ -95,6 +95,16 @@ namespace Player
             anim.CrossFade(targetAnimation, 0.2f);
         }
 
+        public void EnableCombo()
+        {
+            anim.SetBool("Combo", true);
+        }
+        
+        public void DisableCombo()
+        {
+            anim.SetBool("Combo", false);
+        }
+
         private void OnAnimatorMove()
         {
             if (playerManager.IsInteracting == false)

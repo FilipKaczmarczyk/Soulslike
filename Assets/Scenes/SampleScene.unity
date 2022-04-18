@@ -3168,8 +3168,6 @@ GameObject:
   - component: {fileID: 1842505017}
   - component: {fileID: 1842505016}
   - component: {fileID: 1842505019}
-  - component: {fileID: 1842505018}
-  - component: {fileID: 1842505020}
   - component: {fileID: 1842505021}
   - component: {fileID: 1842505022}
   - component: {fileID: 1842505023}
@@ -3226,20 +3224,6 @@ CapsuleCollider:
   m_Height: 1.5
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &1842505018
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842505014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766de16ec36e96b4dbdff0442a5d8694, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerAttacks: {fileID: 1842505023}
-  playerInventory: {fileID: 1842505022}
 --- !u!114 &1842505019
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3256,8 +3240,8 @@ MonoBehaviour:
   moveDirection: {x: 0, y: 0, z: 0}
   playerManager: {fileID: 1842505021}
   mainCamera: {fileID: 963194228}
-  inputHandler: {fileID: 1842505018}
-  animatorHandler: {fileID: 1842505020}
+  inputHandler: {fileID: 0}
+  animatorHandler: {fileID: 5560693730494908136}
   movementSpeed: 5
   sprintSpeed: 8
   rotationSpeed: 10
@@ -3269,21 +3253,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   inAirTimer: 0
---- !u!114 &1842505020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1842505014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5a9d39c83190db488443da88b8d4c07, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 9179720451628771132}
-  playerController: {fileID: 1842505019}
-  playerManager: {fileID: 1842505021}
 --- !u!114 &1842505021
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3296,7 +3265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acd942bd7295c984d8e25483cfed28e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputHandler: {fileID: 1842505018}
+  inputHandler: {fileID: 0}
   animator: {fileID: 9179720451628771132}
   cameraController: {fileID: 768699720}
   playerController: {fileID: 1842505019}
@@ -3327,7 +3296,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69247db71f1770346ba65311c76e22e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorHandler: {fileID: 1842505020}
+  animatorHandler: {fileID: 5560693730494908136}
+  inputHandler: {fileID: 0}
 --- !u!114 &1842505024
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3342,7 +3312,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthLevel: 10
   healthBar: {fileID: 911238272}
-  animatorHandler: {fileID: 1842505020}
+  animatorHandler: {fileID: 5560693730494908136}
 --- !u!1 &1854874455
 GameObject:
   m_ObjectHideFlags: 0
@@ -3603,8 +3573,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: Character
       objectReference: {fileID: 0}
+    - target: {fileID: 8840775908891019083, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}
+      propertyPath: playerManager
+      value: 
+      objectReference: {fileID: 1842505021}
+    - target: {fileID: 8840775908891019083, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1842505019}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}
+--- !u!114 &5560693730494908136 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8840775908891019083, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}
+  m_PrefabInstance: {fileID: 5560693730494908135}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5a9d39c83190db488443da88b8d4c07, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5560693730494908143 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5560693730494908143, guid: 8f2d839d896e96e49875c96e7eae2a49, type: 3}
